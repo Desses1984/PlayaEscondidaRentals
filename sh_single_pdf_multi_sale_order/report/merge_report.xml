@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_merge_pdf_report_action">
+        <t t-call="web.html_container">
+            <t t-call="sh_single_pdf_multi_sale_order.sh_merge_sale_report_doc" t-lang="docs[0].partner_id.lang" />
+        </t>
+    </template>
+
+    <template id="sh_merge_sale_report_doc">
+        <t t-call="web.external_layout">
+            <t t-set="product_dic" t-value="docs[0].merge_sale_order_report(docs)"/>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-0 pr-0">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>HSS Code</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Weight</th>
+                        <th>Volume</th>
+                        <th>Amount</th>
+                    </tr>
+                    <t t-set="total_quantity" t-value="0"/>
+                    <t t-set="total_weight" t-value="0"/>
+                    <t t-set="total_volume" t-value="0"/>
+                    <t t-set="total_amount" t-value="0"/>
+                    <t t-foreach="product_dic.values()" t-as="value">
+                        <tr>
+                            <td>
+                                <t t-esc="value['hss_code']"/>
+                            </td>
+                            <td>
+                                <t t-esc="value['desc']"/>
+                            </td>
+                            <td>
+                                <t t-esc="value['quantity']"/>
+                                <t t-set="total_quantity" t-value="total_quantity + value['quantity']"/>
+                            </td>
+                            <td>
+                                <t t-esc="'%.2f'%(value['weight'])" />
+                                <t t-set="total_weight" t-value="total_weight + value['weight']" />
+                            </td>
+                            <td>
+                                <t t-esc="'%.2f'%(value['volume'])" />
+                                <t t-set="total_volume" t-value="total_volume + value['volume']"/>
+                            </td>
+                            <td>
+                                <t t-esc="'%.2f'%(value['price'])" />
+                                <t t-set="total_amount" t-value="total_amount + value['price']"/>
+                            </td>
+                        </tr>                    
+                    </t>
+                    <tr>
+                        <td></td>
+                        <td>Total</td>                        
+                        <td><t t-esc="total_quantity"/></td>
+                        <td><t t-esc="'%.2f'%(total_weight)"/></td>
+                        <td><t t-esc="'%.2f'%(total_volume)"/></td>
+                        <td><t t-esc="'%.2f'%(total_amount)"/></td>
+                    </tr>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

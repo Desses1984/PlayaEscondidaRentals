@@ -1,0 +1,7 @@
+<odoo>
+    <report id="action_merge_sale_order_pdf" 
+        model="sale.order" 
+        string="Merge Sale Order" 
+        report_type="qweb-pdf"        
+        name="sh_single_pdf_multi_sale_order.report_merge_pdf_report_action" menu="True" />
+</odoo>
