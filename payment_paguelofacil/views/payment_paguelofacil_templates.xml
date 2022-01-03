@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="paguelofacil_form">
+    <input type="hidden" name="data_set" t-att-data-action-url="response_data['url']" data-remove-me=""/>
+    <input type="hidden" name="code" t-att-value="response_data['code']" />
+  </template>
+</odoo>

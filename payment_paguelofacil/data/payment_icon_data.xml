@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="payment_icon_cc_nequi" model="payment.icon">
+        <field name="name">Nequi</field>
+        <field name="image" type="base64" file="payment_paguelofacil/static/img/nequi_icon.png"/>
+    </record>
+    <record id="payment_icon_cc_pagocash" model="payment.icon">
+        <field name="name">Pagocash</field>
+        <field name="image" type="base64" file="payment_paguelofacil/static/img/pagocash_icon.png"/>
+    </record>
+    <record id="payment_icon_cc_sistema_clave" model="payment.icon">
+        <field name="name">Sistema clave</field>
+        <field name="image" type="base64" file="payment_paguelofacil/static/img/sistema_clave_icon.png"/>
+    </record>
+</odoo>
