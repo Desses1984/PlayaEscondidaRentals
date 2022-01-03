@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="account_move_inherit_view_form" model="ir.ui.view">
+        <field name="name">account.move.inherit.view.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='narration']" position="before">
+                <div style="width:300px" attrs="{'invisible':['|',('move_type','!=','in_invoice'),('discount_amount','=',0)]}">
+                    <div id="probability" class="o_row d-flex">
+                        <b class="oe_inline">Discount Method :</b>
+                        <field name="discount_method" />
+                    </div>
+                    <div class="o_row d-flex">
+                        <b class="oe_inline">Discount Amount :</b>
+                        <field name="discount_amount" class="oe_inline" />
+                        <span class="oe_grey" attrs="{'invisible': [('discount_method','=','fixed')]}"> %</span>
+                    </div>
+
+                </div>
+            </xpath>
+
+            <xpath expr="//field[@name='amount_total'][1]" position="replace">
+                <field name="amount_total" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='amount_total'][2]" position="replace">
+                <field name="amount_total" invisible="1" />
+                <field name="sh_final_amount" class="oe_subtotal_footer_separator" string="Total" />
+            </xpath>
+
+            <field name="amount_untaxed" position="after">
+                <field name="order_discount" readonly="1" string="- Discount" attrs="{'invisible':[('move_type','!=','in_invoice')]}" />
+            </field>
+
+        </field>
+    </record>
+</odoo>
